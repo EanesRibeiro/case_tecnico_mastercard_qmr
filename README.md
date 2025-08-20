@@ -1,129 +1,189 @@
-# Case Técnico Flash - Análise de Dados Mastercard QMR
+# 📊 Case Técnico: Mastercard Quarterly Management Reporting (QMR)
 
-## 🎯 Resumo do Desafio
+## 🎯 Objetivo
 
-Este projeto corresponde à resolução de um **case técnico de análise de dados** da Flash, com foco no "Mastercard Quarterly Management Reporting" (QMR).  
+Automatizar o processo de relatórios trimestrais QMR da Mastercard e extrair insights estratégicos para otimização da base de cartões da Flash, identificando oportunidades de crescimento e recuperação de receita.
 
-O objetivo principal foi **responder às questões propostas no desafio**, que envolvem:
+## 💰 Principais Resultados
 
-1. Construir as métricas trimestrais do QMR (cartões ativos, novos, terminados, bloqueados e com transações).
-2. Analisar a adoção de cartões **Contactless vs. PIN** e sugerir estratégias para aumentar a penetração de Contactless.
-3. Explorar dados de bloqueios e cartões expirando para propor **recomendações estratégicas** que otimizem a gestão do portfólio e reduzam riscos.
+- **R$ 9,6 milhões** identificados em receita perdida por cartões bloqueados
+- **25.267 cartões** expirando Q4/2023 mapeados para renovação
+- **79.8%** de penetração contactless vs 20.2% PIN
+- **100%** automação do processo QMR implementada
+
+## 📁 Estrutura do Projeto
+
+```
+case_tecnico_mastercard_qmr/
+├── data/                          # Dados brutos (não versionados)
+│   ├── cards.csv
+│   ├── cards_status.csv
+│   └── cards_transactions.csv
+├── notebooks/                     # Análises e exploração
+│   └── EDA.ipynb                 # Notebook principal com todas as análises
+├── outputs/                       # Resultados gerados
+│   ├── graficos/                 # Visualizações exportadas
+│   └── tabelas/                  # Métricas QMR consolidadas
+├── requirements.txt              # Dependências do projeto
+├── README.md                     # Documentação do projeto
+└── .gitignore                    # Arquivos ignorados pelo Git
+```
+
+## 🔧 Configuração do Ambiente
+
+### Pré-requisitos
+- Python 3.8+
+- Jupyter Notebook/Lab
+- Git
+
+### Instalação
+
+1. **Clone o repositório:**
+```bash
+git clone https://github.com/EanesRibeiro/case_tecnico_mastercard_qmr.git
+cd case_tecnico_mastercard_qmr
+```
+
+2. **Crie um ambiente virtual:**
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+venv\Scripts\activate     # Windows
+```
+
+3. **Instale as dependências:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Baixe os dados:**
+   - Acesse: [Google Drive - Dados do Projeto](https://drive.google.com/drive/folders/1T3VXMs0XWnuV59n0puhRTXXlfyDwqwvO)
+   - Baixe os arquivos CSV para a pasta `data/`
+
+5. **Execute o notebook:**
+```bash
+jupyter notebook notebooks/EDA.ipynb
+```
+
+## 📊 Metodologia
+
+### 1. Exploração e Limpeza dos Dados (EDA)
+- **Carregamento:** 3 tabelas principais (cards, cards_status, cards_transactions)
+- **Validação:** Verificação de duplicatas, valores nulos e consistência temporal
+- **Transformação:** Conversão de colunas de data para datetime
+- **Função customizada:** `get_status_on_date(card_number, ref_date)` para determinar status histórico
+
+### 2. Construção das Métricas QMR
+- Cards at Beginning/End of Quarter (Open/Blocked)
+- New Cards Obtained During Quarter
+- Cards Terminated During Quarter  
+- Cards with at Least One Transaction
+- Validação da equação: `End ≈ Beginning + New - Terminated`
+
+### 3. Análises Estratégicas
+- **Penetração Contactless vs PIN** por empresa e segmento
+- **Análise de bloqueios** e tempo médio de resolução
+- **Cartões expirando** e oportunidades de renovação
+- **Segmentação de clientes** para campanhas direcionadas
+
+## 📈 Principais Insights
+
+### Crescimento da Base
+- **Q1→Q3 2023:** Crescimento de 61% (159.767 → 258.007 cartões)
+- **Padrão preocupante:** Terminações cresceram 136% no período
+- **Taxa de transação:** Melhoria consistente (126K → 173K cartões ativos)
+
+### Tecnologia Contactless
+| Tecnologia | Quantidade | Percentual |
+|------------|------------|------------|
+| Contactless | 205.892 | 79.8% |
+| PIN | 52.115 | 20.2% |
+
+**Concentração PIN:** Top 10 empresas possuem 3.500+ cartões PIN (oportunidade direcionada)
+
+### Cartões Bloqueados
+- **6.092 cartões** bloqueados no fim Q3/2023
+- **R$ 9,6 milhões/trimestre** em receita perdida estimada
+- **36.217 eventos** de bloqueio sem resolução identificados
+
+## 🎯 Recomendações Estratégicas
+
+### 1. Gestão de Bloqueios
+- **Sistema de alertas** escalonados (30/60/90 dias)
+- **Campanhas de reativação** automatizadas
+- **Processo simplificado** de desbloqueio via app
+
+### 2. Migração Contactless
+- **Foco B2B:** Campanha direcionada às top 10 empresas
+- **Renovação inteligente:** Upgrade automático PIN→Contactless
+- **Meta:** 85%+ penetração contactless até Q4/2023
+
+### 3. Gestão de Expiração
+- **21.592 ativos:** Renovação automática prioritária
+- **3.673 inativos:** Campanha reengajamento com incentivos
+
+## 🔍 Principais Funções
+
+### `get_status_on_date(card_number, ref_date)`
+Determina o status de um cartão em uma data específica baseado no histórico de mudanças.
+
+**Parâmetros:**
+- `card_number` (str): Número do cartão
+- `ref_date` (datetime): Data de referência
+
+**Retorna:**
+- `str`: Status do cartão na data ('OPEN', 'TEMPORARILY_BLOCKED', etc.)
+
+**Exemplo:**
+```python
+status = get_status_on_date('1234567890', pd.to_datetime('2023-09-30'))
+print(status)  # 'OPEN'
+```
+
+## 📊 Visualizações Disponíveis
+
+- **Evolução QMR:** Gráficos de linha com métricas trimestrais
+- **Contactless vs PIN:** Pizza chart + análise por empresa
+- **Timeline de bloqueios:** Distribuição temporal
+- **Pipeline expiração:** Segmentação por status
+
+## 🚀 Próximos Passos
+
+### Implementação (Roadmap)
+- **Semana 1-2:** Dashboard QMR automatizado
+- **Semana 3-4:** Sistema de alertas de bloqueio
+- **Mês 2:** Campanha migração contactless B2B
+- **Mês 3:** Política renovação automática
+
+### Melhorias Futuras
+- [ ] Dashboard interativo (Streamlit/Dash)
+- [ ] Modelo preditivo de bloqueios
+- [ ] API para consulta de métricas em tempo real
+- [ ] Integração com sistemas internos da Flash
+
+## 📋 Dependências Principais
+
+```txt
+pandas>=1.3.0
+numpy>=1.21.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+jupyter>=1.0.0
+openpyxl>=3.0.0
+```
+
+## 📞 Contato
+
+**Desenvolvido por:** Eanes Ribeiro  
+**LinkedIn:** [linkedin.com/in/eanes-ribeiro](https://linkedin.com/in/eanes-ribeiro)  
+**GitHub:** [@EanesRibeiro](https://github.com/EanesRibeiro)  
+**Email:** eanes.ribeiro@email.com
+
+## 📄 Licença
+
+Este projeto foi desenvolvido como case técnico para processo seletivo. Todos os dados são fictícios e utilizados apenas para fins educacionais.
 
 ---
 
-## 🛠️ Metodologia
-
-O projeto foi dividido em etapas:
-
-1. **Organização do Projeto**
-   - Diretórios: `data/`, `notebooks/`, `outputs/`.
-   - Arquivos principais: `EDA.ipynb` (análise exploratória e resolução do case).
-
-2. **Exploração e Limpeza dos Dados (EDA)**
-   - Carregamento das tabelas `cards`, `cards_status`, `cards_transactions`.
-   - Verificação de duplicatas, nulos e consistência entre chaves.
-   - Conversão de colunas de data para `datetime`.
-   - Criação da função `get_status_on_date(card_number, ref_date)` para determinar status de cartões em uma data de referência.
-
-3. **Questão 1 – Relatório QMR**
-   - Construção de um DataFrame consolidado para Q1, Q2 e Q3/2023.
-   - Cálculo das métricas:
-     - Cards at Beginning of Quarter (Open / Blocked).
-     - New Cards Obtained During Quarter.
-     - Cards Terminated During Quarter.
-     - Cards at End of Quarter (Open / Blocked).
-     - Cards with at Least One Transaction.
-   - Validação da equação: `End ≈ Beginning + New - Terminated`.
-
-4. **Questão 2 – Análise Contactless vs. PIN**
-   - Percentual de cartões Contactless no final do Q3/2023.
-   - Segmentação das top empresas com maior volume de cartões PIN.
-   - Identificação de cartões PIN próximos da expiração → candidatos para upgrade.
-   - Visualizações: gráfico de pizza (Contactless vs. PIN) e barras (Top Empresas com PIN).
-
-5. **Questão 3 – Insights Estratégicos**
-   - Análise de cartões “temporarily blocked” sem mudança de status relevante em trimestres subsequentes.
-   - Cálculo do tempo médio de bloqueio e estimativa do impacto em receita.
-   - Identificação de cartões expirando no Q4/2023.
-   - Formulação de recomendações estratégicas: renovação automática, campanhas de reengajamento, upgrade para Contactless.
-
-6. **Visualizações**
-   - Gráficos de linha para evolução das métricas QMR.
-   - Gráficos de barras empilhadas (Open vs. Blocked).
-   - Outputs armazenados em `outputs/`.
-
----
-
-## 📊 Resultados Chave
-
-### Relatório QMR (Q1–Q3 2023)
-
-| Quarter | Cards at Beginning (Open) | Cards at Beginning (Blocked) | New Cards Obtained | Cards Terminated | Cards at End (Open) | Cards at End (Blocked) | Cards with ≥1 Transaction |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Q1 2023 | 158,599 | 1,168 | 90 | 4,686 | 181,508 | 5,373 | 126,560 |
-| Q2 2023 | 181,508 | 5,373 | 91 | 8,687 | 215,200 | 5,681 | 153,578 |
-| Q3 2023 | 215,200 | 5,681 | 92 | 11,061 | 251,915 | 6,092 | 173,232 |
-
-### Contactless vs. PIN (Q3/2023)
-
-- **Contactless:** 201,027 (79.8%)
-- **PIN:** 50,888 (20.2%)
-
-### Top 10 Empresas com Maior Volume de Cartões PIN
-
-| Company_ID | # Cartões PIN |
-| :--- | ---: |
-| 5e5845d509555e0007d06483 | 575 |
-| 5d9408e9b0d899000754c19b | 575 |
-| 5f15f3ed20f6540008628942 | 499 |
-| 6023d0e9f22b98000701db6f | 392 |
-| 60d1f118462483000902d83d | 284 |
-| 602faf45145da600073b1b1f | 256 |
-| 5f299d66b18f850008c4e289 | 249 |
-| 60509c5a9964610007cc0031 | 243 |
-| 61489736429d920009ff62eb | 242 |
-| 60d9d19a7751350008fcb408 | 208 |
-
----
-
-## 💡 Recomendações de Negócio
-
-1. **Bloqueios**
-   - Implementar alertas para bloqueios prolongados.
-   - Criar fluxos de reativação proativa para reduzir perda de receita.
-
-2. **Adoção Contactless**
-   - Incentivar upgrades de PIN próximos da expiração.
-   - Focar em empresas com maior volume de PIN para impacto mais rápido.
-
-3. **Retenção**
-   - Renovação automática para cartões ativos.
-   - Campanhas de reengajamento personalizadas para bloqueados/inativos.
-
-4. **Monitoramento**
-   - Dashboard contínuo com métricas QMR, taxas de bloqueio e expiração.
-
-5. **Churn**
-   - Analisar fatores de abandono pós-bloqueio.
-   - Desenvolver modelos preditivos para retenção.
-
----
-
-## 📂 Estrutura do Projeto
-
-├── data/ # Dados brutos
-├── notebooks/ # Notebooks de análise (EDA, métricas, gráficos)
-├── outputs/ # Gráficos e tabelas gerados
-├── README.md # Documentação do projeto
-
-## 📂 Fonte dos Dados
-
-Os dados utilizados neste projeto não estão no repositório e podem ser acessados através do seguinte link:
-[Dados do Projeto - Google Drive](https://drive.google.com/drive/folders/1T3VXMs0XWnuV59n0puhRTXXlfyDwqwvO)
-
-## 🚀 Tecnologias Utilizadas
-
-- Python (Pandas, Numpy, Matplotlib, Seaborn)
-- Jupyter Notebook
-- Git/GitHub para versionamento
+⭐ **Se este projeto foi útil, deixe uma estrela no repositório!**
