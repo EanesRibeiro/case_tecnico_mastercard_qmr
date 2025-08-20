@@ -7,6 +7,3 @@ data/*.pdf
 data/*.xls
 data/*.xlsx
 data/*.docx
-*.png
-*.html
-*.jpg
