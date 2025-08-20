@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+outputs/
+data/*.csv
+data/*.pdf
+data/*.xls
+data/*.xlsx
+data/*.docx
+*.png
+*.html
+*.jpg
