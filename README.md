@@ -117,6 +117,10 @@ O projeto foi dividido em etapas:
 ├── outputs/ # Gráficos e tabelas gerados
 ├── README.md # Documentação do projeto
 
+## 📂 Fonte dos Dados
+
+Os dados utilizados neste projeto não estão no repositório e podem ser acessados através do seguinte link:
+[Dados do Projeto - Google Drive](https://drive.google.com/drive/folders/1T3VXMs0XWnuV59n0puhRTXXlfyDwqwvO)
 
 ## 🚀 Tecnologias Utilizadas
 
