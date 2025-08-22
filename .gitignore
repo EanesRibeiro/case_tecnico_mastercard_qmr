@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-outputs/
+# outputs/  # Comentado para permitir o versionamento da pasta outputs
 data/*.csv
 data/*.pdf
 data/*.xls
