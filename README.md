@@ -34,22 +34,59 @@ O gráfico de linhas compara a aquisição de novos cartões com o número de ca
 ![Evolução de Novos Cartões vs. Encerrados](outputs/evolucao_new_vs_terminated.png)
 
 ## 📁 Estrutura do Projeto
+
+```
 case_tecnico_mastercard_qmr/
-├── data/
+├── data/                          # Dados brutos (não versionados)
 │   ├── cards.csv
 │   ├── cards_status.csv
 │   └── cards_transactions.csv
-├── notebooks/
-│   └── EDA.ipynb
-├── outputs/
-│   ├── contactless_vs_pin_flash.png
-│   └── evolucao_new_vs_terminated.png
-├── requirements.txt
-└── README.md
+├── notebooks/                     # Análises e exploração
+│   └── EDA.ipynb                 # Notebook principal com todas as análises
+├── outputs/                       # Resultados gerados
+│   ├── graficos/                 # Visualizações exportadas
+│   └── tabelas/                  # Métricas QMR consolidadas
+├── requirements.txt              # Dependências do projeto
+├── README.md                     # Documentação do projeto
+└── .gitignore                    # Arquivos ignorados pelo Git
+```
 
 ## 🔧 Configuração do Ambiente
 
-(Sua seção de configuração está ótima e pode ser mantida como no original)
+### Pré-requisitos
+- Python 3.8+
+- Jupyter Notebook/Lab
+- Git
+
+### Instalação
+
+1. **Clone o repositório:**
+```bash
+git clone https://github.com/EanesRibeiro/case_tecnico_mastercard_qmr.git
+cd case_tecnico_mastercard_qmr
+```
+
+2. **Crie um ambiente virtual:**
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+venv\Scripts\activate     # Windows
+```
+
+3. **Instale as dependências:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Baixe os dados:**
+   - Acesse: [Google Drive - Dados do Projeto](https://drive.google.com/drive/folders/1T3VXMs0XWnuV59n0puhRTXXlfyDwqwvO)
+   - Baixe os arquivos CSV para a pasta `data/`
+
+5. **Execute o notebook:**
+```bash
+jupyter notebook notebooks/EDA.ipynb
+```
 
 ## 📊 Metodologia
 
