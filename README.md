@@ -23,13 +23,13 @@ Automatizar o processo de relatórios trimestrais QMR e extrair insights estrat�
 
 ## 📈 Principais Visualizações do Projeto
 
-#### Atividade Transacional por Dia e Hora
-O heatmap revela padrões de uso distintos entre dias úteis e fins de semana, com picos claros no horário de almoço e no final da tarde, fornecendo insumos para campanhas de marketing direcionadas.
+#### Penetração da Tecnologia Contactless vs. PIN
+Este gráfico de barras mostra a distribuição dos cartões ativos no final do Q3 2023. A análise revela uma forte adoção da tecnologia Contactless (79.8%), mas também uma base relevante de 20.2% de cartões PIN, que representa uma oportunidade clara para campanhas de migração.
 
-![Heatmap de Atividade Transacional](outputs/transaction_activity_heatmap.png)
+![Distribuição de Cartões Ativos por Tecnologia](outputs/contactless_vs_pin_flash.png)
 
-#### Evolução de Novos Cartões vs. Encerrados
-O gráfico mostra um crescimento consistente na aquisição de novos cartões, mas também um aumento preocupante nos encerramentos. A projeção para o Q4 indica a manutenção dessa tendência, reforçando a necessidade de ações de retenção.
+#### Projeção para Q4 de Novos Cartões vs. Encerrados
+O gráfico de linhas compara a aquisição de novos cartões com o número de cartões encerrados por trimestre, incluindo uma projeção linear para o Q4. Ele evidencia um crescimento saudável na aquisição, mas também um aumento na taxa de encerramento que merece atenção.
 
 ![Evolução de Novos Cartões vs. Encerrados](outputs/evolucao_new_vs_terminated.png)
 
@@ -42,14 +42,14 @@ case_tecnico_mastercard_qmr/
 ├── notebooks/
 │   └── EDA.ipynb
 ├── outputs/
-│   ├── transaction_activity_heatmap.png
+│   ├── contactless_vs_pin_flash.png
 │   └── evolucao_new_vs_terminated.png
 ├── requirements.txt
 └── README.md
 
 ## 🔧 Configuração do Ambiente
 
-(A sua seção de configuração está ótima e pode ser mantida como no original)
+(Sua seção de configuração está ótima e pode ser mantida como no original)
 
 ## 📊 Metodologia
 
@@ -86,9 +86,22 @@ Esta função é o núcleo técnico do projeto. Ela determina o status mais rece
 **Retorna:**
 * `DataFrame`: Um DataFrame contendo o último status conhecido de cada cartão na data de referência.
 
-## 🚀 Próximos Passos e Melhorias Futuras
+## 🎯 Recomendações Estratégicas
 
-(A sua seção atual está ótima e pode ser mantida como no original)
+Com base nos insights gerados na análise, as seguintes ações são recomendadas:
+
+#### 1. Gestão de Bloqueios e Recuperação de Receita
+* **Implementar alertas proativos** para a equipe de Sucesso do Cliente quando um cartão permanecer em `TEMPORARILY_BLOCKED` por um período prolongado (ex: acima de 7 dias).
+* **Criar campanhas de reativação** direcionadas para clientes com bloqueios retidos, oferecendo suporte para resolução do problema.
+* **Analisar as causas-raiz** dos bloqueios para identificar padrões e implementar melhorias de produto ou processo que reduzam a ocorrência.
+
+#### 2. Migração para Contactless
+* **Campanha B2B:** Focar a migração de cartões PIN para Contactless nas **top 10 empresas** identificadas, que concentram o maior volume da tecnologia antiga.
+* **Renovação Inteligente:** Aproveitar o ciclo de expiração dos cartões para realizar o **upgrade automático** de todos os cartões PIN que serão renovados, otimizando a logística.
+
+#### 3. Gestão do Ciclo de Vida do Cartão (Expiração)
+* **Renovação Proativa:** Para os **21.592 cartões ativos** que expiram no Q4, garantir um processo de renovação automática e sem atritos para manter a receita e a satisfação.
+* **Campanha de Reengajamento:** Para os **916 cartões bloqueados** que expiram no Q4, criar uma campanha específica para reengajá-los, usando a necessidade de um novo cartão como incentivo para resolver a pendência do bloqueio.
 
 ---
 
